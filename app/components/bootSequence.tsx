@@ -130,7 +130,7 @@ export default function BootSequence({ onComplete }: BootSequenceProps) {
               <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-emerald-400 shadow-lg shadow-emerald-400/50 animate-pulse" />
               <Terminal className="w-4 h-4 sm:w-5 sm:h-5 text-white/60" />
               <span className="text-[10px] sm:text-sm text-white/60 font-mono font-medium tracking-wider uppercase">
-                Terminal • Boot Sequence
+                Spaceship • Boot Sequence
               </span>
             </div>
             <span className="text-[8px] sm:text-xs text-white/30 font-mono tracking-widest">

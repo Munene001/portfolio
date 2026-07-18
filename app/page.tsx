@@ -1,38 +1,104 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
+import { ParticlesProvider } from '@tsparticles/react';
+import { loadSlim } from '@tsparticles/slim';
+import type { Engine } from '@tsparticles/engine';
+
 import BootSequence from './components/bootSequence';
 import Starfield from './components/starField';
+import Navbar from './components/navBar';
+import ThrusterIndicator from './components/thrusterIndicator';
+
+import HeroSection from './components/sections/heroSection';
+import AboutSection from './components/sections/aboutSection';
+import ExperienceSection from './components/sections/experienceSection';
+import ProjectsSection from './components/sections/projectSection';
+import SkillsSection from './components/sections/skillSection';
+import ContactSection from './components/sections/contactSection';
+
+import { Rocket, Cpu, Briefcase, Code, Zap, Mail, ChevronDown } from 'lucide-react';
 
 export default function Home() {
   const [bootComplete, setBootComplete] = useState(false);
+  const [activeSection, setActiveSection] = useState(0);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const sectionsRef = useRef<(HTMLDivElement | null)[]>([]);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  const handleInit = async (engine: Engine) => {
+    await loadSlim(engine);
+  };
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (!containerRef.current) return;
+      const scrollY = window.scrollY;
+      const sectionHeight = window.innerHeight;
+      const currentSection = Math.round(scrollY / sectionHeight);
+      setActiveSection(Math.min(currentSection, sectionsRef.current.length - 1));
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const scrollToSection = (index: number) => {
+    if (sectionsRef.current[index]) {
+      sectionsRef.current[index]?.scrollIntoView({ behavior: 'smooth' });
+      setIsMobileMenuOpen(false);
+    }
+  };
 
   if (!bootComplete) {
-    return (
-      <>
-        <Starfield />
-        <BootSequence onComplete={() => setBootComplete(true)} />
-      </>
-    );
+    return <BootSequence onComplete={() => setBootComplete(true)} />;
   }
 
-  // Simple test content after boot
+  const navItems = [
+    { label: 'Home', icon: <Rocket className="w-4 h-4" /> },
+    { label: 'About', icon: <Cpu className="w-4 h-4" /> },
+    { label: 'Experience', icon: <Briefcase className="w-4 h-4" /> },
+    { label: 'Projects', icon: <Code className="w-4 h-4" /> },
+    { label: 'Skills', icon: <Zap className="w-4 h-4" /> },
+    { label: 'Contact', icon: <Mail className="w-4 h-4" /> },
+  ];
+
   return (
-    <main className="min-h-screen flex items-center justify-center bg-[#0a0a12]">
-      <div className="text-center">
-        <h1 className="text-4xl font-mono text-[#00ff41]">
-          Boot Complete!
-        </h1>
-        <p className="text-xl mt-4 text-[#6c2bd9] font-mono">
-          Welcome to your space portfolio
-        </p>
-        <button 
-          onClick={() => setBootComplete(false)}
-          className="mt-8 px-6 py-2 border border-[#00ff41] text-[#00ff41] hover:bg-[#00ff41]/10 transition font-mono"
-        >
-          Reboot
-        </button>
+    <ParticlesProvider init={handleInit}>
+      <div className="relative bg-[#0a0a12] text-white font-mono selection:bg-emerald-500/30 selection:text-emerald-300 antialiased overflow-x-hidden">
+        
+        {/* Deep Space Background Layer */}
+        <div className="fixed inset-0 z-0 pointer-events-none">
+          <Starfield />
+        </div>
+
+        {/* Dynamic Navigation Deck */}
+        <Navbar 
+          navItems={navItems} 
+          activeSection={activeSection} 
+          scrollToSection={scrollToSection}
+          isOpen={isMobileMenuOpen}
+          setIsOpen={setIsMobileMenuOpen}
+        />
+
+        {/* Rocket Telemetry HUD */}
+        <ThrusterIndicator />
+
+        {/* Floating Scroll Cue */}
+        <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-40 animate-bounce hidden md:block pointer-events-none">
+          <ChevronDown className="w-6 h-6 text-white/20" />
+        </div>
+
+        {/* Page Section Grid Containers */}
+        <div ref={containerRef} className="relative z-10 w-full flex flex-col">
+          <HeroSection setRef={(el) => (sectionsRef.current[0] = el)} onNavigate={() => scrollToSection(3)} />
+          <AboutSection setRef={(el) => (sectionsRef.current[1] = el)} />
+          <ExperienceSection setRef={(el) => (sectionsRef.current[2] = el)} />
+          <ProjectsSection setRef={(el) => (sectionsRef.current[3] = el)} />
+          <SkillsSection setRef={(el) => (sectionsRef.current[4] = el)} />
+          <ContactSection setRef={(el) => (sectionsRef.current[5] = el)} />
+        </div>
       </div>
-    </main>
+    </ParticlesProvider>
   );
 }
