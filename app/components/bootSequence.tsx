@@ -40,7 +40,7 @@ export default function BootSequence({ onComplete }: BootSequenceProps) {
   useEffect(() => {
     const bootTimer = setTimeout(() => {
       onComplete();
-    }, 4500);
+    }, 1000);
 
     const showNextLog = () => {
       if (currentIndex < bootLogs.length) {

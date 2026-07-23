@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { Geist,Space_Mono ,Geist_Mono } from "next/font/google";
+import { Geist, Space_Mono, Geist_Mono } from "next/font/google";
+import StarfieldProvider from "./components/starField-wrapper";
 
 import "./globals.css";
 
@@ -13,8 +14,6 @@ const spaceMono = Space_Mono({
   subsets: ["latin"],
   variable: "--font-space-mono",
 });
-
-
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
@@ -32,11 +31,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} ${spaceMono.variable} h-full antialiased`}
-    >
-      <body className="min-h-full flex flex-col">{children}</body>
+    <html lang="en" suppressHydrationWarning>
+      <body suppressHydrationWarning className="bg-[#0a0a12]">
+        {/* Persistent background & global tsParticles context */}
+        <StarfieldProvider>
+          {children}
+        </StarfieldProvider>
+      </body>
     </html>
   );
 }

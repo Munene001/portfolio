@@ -1,17 +1,13 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
-import { ParticlesProvider } from '@tsparticles/react';
-import { loadSlim } from '@tsparticles/slim';
-import type { Engine } from '@tsparticles/engine';
 
 import BootSequence from './components/bootSequence';
-import Starfield from './components/starField';
 import Navbar from './components/navBar';
 import ThrusterIndicator from './components/thrusterIndicator';
 
 import HeroSection from './components/sections/heroSection';
-import AboutSection from './components/sections/aboutSection';
+
 import ExperienceSection from './components/sections/experienceSection';
 import ProjectsSection from './components/sections/projectSection';
 import SkillsSection from './components/sections/skillSection';
@@ -26,10 +22,6 @@ export default function Home() {
   const sectionsRef = useRef<(HTMLDivElement | null)[]>([]);
   const containerRef = useRef<HTMLDivElement>(null);
 
-  const handleInit = async (engine: Engine) => {
-    await loadSlim(engine);
-  };
-
   useEffect(() => {
     const handleScroll = () => {
       if (!containerRef.current) return;
@@ -39,7 +31,7 @@ export default function Home() {
       setActiveSection(Math.min(currentSection, sectionsRef.current.length - 1));
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -64,41 +56,36 @@ export default function Home() {
   ];
 
   return (
-    <ParticlesProvider init={handleInit}>
-      <div className="relative bg-[#0a0a12] text-white font-mono selection:bg-emerald-500/30 selection:text-emerald-300 antialiased overflow-x-hidden">
-        
-        {/* Deep Space Background Layer */}
-        <div className="fixed inset-0 z-0 pointer-events-none">
-          <Starfield />
-        </div>
+    <div className="relative text-white font-mono selection:bg-emerald-500/30 selection:text-emerald-300 antialiased overflow-x-hidden">
+      {/* Dynamic Navigation Deck */}
+      <Navbar 
+        navItems={navItems} 
+        activeSection={activeSection} 
+        scrollToSection={scrollToSection}
+        isOpen={isMobileMenuOpen}
+        setIsOpen={setIsMobileMenuOpen}
+      />
 
-        {/* Dynamic Navigation Deck */}
-        <Navbar 
-          navItems={navItems} 
-          activeSection={activeSection} 
-          scrollToSection={scrollToSection}
-          isOpen={isMobileMenuOpen}
-          setIsOpen={setIsMobileMenuOpen}
-        />
+      {/* Rocket Telemetry HUD */}
+      <ThrusterIndicator />
 
-        {/* Rocket Telemetry HUD */}
-        <ThrusterIndicator />
-
-        {/* Floating Scroll Cue */}
-        <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-40 animate-bounce hidden md:block pointer-events-none">
-          <ChevronDown className="w-6 h-6 text-white/20" />
-        </div>
-
-        {/* Page Section Grid Containers */}
-        <div ref={containerRef} className="relative z-10 w-full flex flex-col">
-          <HeroSection setRef={(el) => (sectionsRef.current[0] = el)} onNavigate={() => scrollToSection(3)} />
-          <AboutSection setRef={(el) => (sectionsRef.current[1] = el)} />
-          <ExperienceSection setRef={(el) => (sectionsRef.current[2] = el)} />
-          <ProjectsSection setRef={(el) => (sectionsRef.current[3] = el)} />
-          <SkillsSection setRef={(el) => (sectionsRef.current[4] = el)} />
-          <ContactSection setRef={(el) => (sectionsRef.current[5] = el)} />
-        </div>
+      {/* Floating Scroll Cue */}
+      <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-40 animate-bounce hidden md:block pointer-events-none">
+        <ChevronDown className="w-6 h-6 text-white/20" />
       </div>
-    </ParticlesProvider>
+
+      {/* Page Section Grid Containers */}
+      <div ref={containerRef} className="relative z-10  w-full flex flex-col">
+        <HeroSection 
+          setRef={(el) => (sectionsRef.current[0] = el)} 
+          onNavigate={() => scrollToSection(3)} 
+        />
+        
+        <ExperienceSection setRef={(el) => (sectionsRef.current[2] = el)} />
+        <ProjectsSection setRef={(el) => (sectionsRef.current[3] = el)} />
+        <SkillsSection setRef={(el) => (sectionsRef.current[4] = el)} />
+        <ContactSection setRef={(el) => (sectionsRef.current[5] = el)} />
+      </div>
+    </div>
   );
 }

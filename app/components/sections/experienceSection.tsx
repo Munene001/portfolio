@@ -3,25 +3,72 @@
 interface ExperienceProps {
   setRef: (el: HTMLDivElement | null) => void;
 }
-
-// -------------------------------------------------------------
-// DATA DECLARATION DECLARATIONS (Edit career log configurations here)
-// -------------------------------------------------------------
 const MISSION_LOGS = [
   {
-    role: "Lead Flight Engineer (Senior Dev)",
-    company: "SpaceX Global Array Operations",
-    period: "2024 - PRESENT",
-    description: "Architected micro-frontend systems linking telemetry tracking arrays across orbital satellites. Reduced edge pipeline loading failures by 30% through robust network layer logic.",
-    tags: ["Next.js", "GraphQL", "AWS Cloud", "Kubernetes"]
+    role: "Fullstack Engineer",
+    company: "PaziaTech",
+    period: "Jan 2025 – Present",
+    description:
+      "Founded and built a multi-tenant SaaS e-commerce platform from the ground up. Designed scalable backend services, developed modern web applications, implemented authentication and RBAC, and continuously improved performance and user experience.",
+
+    tags: [
+      "Next js",
+      "TypeScript",
+      "SQL",
+      "Supabase",
+      "Git",
+      "Docker",
+      "Linux"
+    ],
   },
+
   {
-    role: "Full-Stack System Specialist",
-    company: "Nebula Infrastructure Labs",
-    period: "2022 - 2024",
-    description: "Re-engineered standard internal core communication hooks and API endpoints, establishing bulletproof processing protocols across distributed database arrays.",
-    tags: ["TypeScript", "Node.js", "PostgreSQL", "Docker Ops"]
-  }
+    role: "Frontend Engineer",
+    company: "Tunga Africa",
+    period: "Aug 2025 – Apr 2026",
+     description:
+    "Developed responsive and accessible frontend features for an educational platform that helps integrate African films into schools and tertiary institutions. Collaborated with designers and backend engineers to build engaging user experiences, integrate REST APIs, and improve performance across the platform.",
+
+    tags: [
+      "Next.js",
+      "TypeScript",
+      "Tailwind CSS",
+      "REST APIs",
+      "Git",
+    ],
+  },
+
+  {
+    role: "Consultant Software Engineer",
+    company: "Hpaysa",
+    period: "Jul 2024 – Jul 2025",
+    description:
+      "Collaborated directly with clients to understand requirements and deliver software solutions across fintech, civic engagement, and real estate. Developed backend services, built REST APIs, optimized databases, and supported deployment and maintenance throughout the SDLC.",
+    tags: [
+      "Laravel",
+      "PHP",
+      "MySQL",
+      "Svelte",
+      "Vue.js",
+      "Git",
+    ],
+  },
+
+  {
+    role: "Software Engineering Intern",
+    company: "Sapama Technologies",
+    period: "May 2023 – Sep 2023",
+    description:
+      "Contributed to application development by building features, integrating APIs, optimizing database queries, resolving defects, and collaborating with senior engineers in an Agile environment.",
+
+    tags: [
+      "Laravel",
+      "PHP",
+      "MySQL",
+      "Git",
+      "REST APIs",
+    ],
+  },
 ];
 
 export default function ExperienceSection({ setRef }: ExperienceProps) {
@@ -47,7 +94,7 @@ export default function ExperienceSection({ setRef }: ExperienceProps) {
               </div>
 
               {/* Responsive date labels */}
-              <div className="md:absolute md:-left-36 md:top-1.5 text-xs text-white/30 font-bold tracking-widest uppercase group-hover:text-emerald-400/60 transition-colors mb-2 md:mb-0 block">
+              <div className="md:absolute md:-left-36 md:top-1.5 text-xs text-white/70 font-bold tracking-widest uppercase group-hover:text-emerald-400/60 transition-colors mb-2 md:mb-0 block">
                 {exp.period}
               </div>
 
@@ -55,11 +102,11 @@ export default function ExperienceSection({ setRef }: ExperienceProps) {
               <div className="bg-white/[0.02] backdrop-blur-md rounded-2xl p-6 border border-white/5 hover:border-white/10 transition-all duration-300 shadow-xl">
                 <h3 className="text-white font-bold text-lg group-hover:text-emerald-400 transition-colors duration-300">{exp.role}</h3>
                 <span className="text-emerald-400 text-xs tracking-wider font-semibold block mb-3">{exp.company}</span>
-                <p className="text-white/50 text-sm leading-relaxed mb-5 font-sans">{exp.description}</p>
+                <p className="text-white/90 text-sm leading-relaxed mb-5 font-sans">{exp.description}</p>
                 
                 <div className="flex flex-wrap gap-2">
                   {exp.tags.map((tag) => (
-                    <span key={tag} className="px-2.5 py-0.5 border border-white/5 rounded bg-white/5 text-[9px] tracking-widest text-white/50 uppercase font-bold">
+                    <span key={tag} className="px-2.5 py-0.5 border border-white/5 rounded bg-white/5 text-[9px] tracking-widest text-white/70 uppercase font-bold">
                       {tag}
                     </span>
                   ))}
