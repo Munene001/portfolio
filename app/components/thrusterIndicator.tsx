@@ -16,7 +16,6 @@ export default function ThrusterIndicator() {
   const speedVelocity = useTransform(smoothProgress, [0, 1], [11200, 40300]);
   const [displaySpeed, setDisplaySpeed] = useState(11200);
 
-  // Handle scroll activity detection with instant response
   useEffect(() => {
     let timeout: NodeJS.Timeout;
     const handleScrollActivity = () => {
@@ -32,7 +31,6 @@ export default function ThrusterIndicator() {
     };
   }, []);
 
-  // Listen to speed changes
   useMotionValueEvent(speedVelocity, "change", (latest) => {
     setDisplaySpeed(Math.round(latest));
   });
@@ -47,13 +45,7 @@ export default function ThrusterIndicator() {
     : 'linear-gradient(to bottom, #ffffff, #34d399, #059669, transparent)';
 
   return (
-    <div 
-      className={`fixed right-2 sm:right-4 top-1/2 -translate-y-1/2 z-50 flex flex-col items-center gap-3 sm:gap-4 font-mono select-none pointer-events-none origin-right scale-75 xl:scale-100 ${
-        /* On Mobile (< xl): Hide instantly when stationary, display immediately when scrolling.
-           On Desktop (>= xl): Always visible via xl:flex */
-        isScrolling ? 'flex' : 'hidden xl:flex'
-      }`}
-    >
+    <div className="fixed right-2 sm:right-4 top-1/2 -translate-y-1/2 z-50 hidden lg:flex flex-col items-center gap-3 sm:gap-4 font-mono select-none pointer-events-none origin-right scale-75 xl:scale-100">
       {/* Velocity Display */}
       <div className="bg-black/80 backdrop-blur-md border border-white/5 rounded-xl p-2.5 sm:p-3 text-right min-w-[105px] sm:min-w-[120px] shadow-2xl">
         <div className="text-[7px] sm:text-[8px] text-white/30 font-bold tracking-widest uppercase mb-0.5">

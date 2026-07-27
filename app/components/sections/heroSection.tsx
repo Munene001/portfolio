@@ -2,7 +2,6 @@
 
 import { 
   Rocket, 
-  MapPin, 
   Mail, 
   ChevronRight, 
   Terminal, 
@@ -13,6 +12,7 @@ import {
 interface HeroProps {
   setRef?: (el: HTMLDivElement | null) => void;
   onNavigate?: () => void;
+  onContactNavigate?: () => void; // New prop for contact navigation
 }
 
 // Custom inline SVG icons for social platforms
@@ -32,8 +32,7 @@ const HERO_DATA = {
   badge: 'FULL-STACK ENGINEER & SAAS ARCHITECT',
   title: 'Lawrence Munene',
   subTitle:
-    
-  "I make computers do useful things. Sometimes they even cooperate. The other times, we negotiate through error messages and coffee.",
+    "I make computers do useful things. Sometimes they even cooperate. The other times, we negotiate through error messages and coffee.",
   techStack: [
     'React',
     'TypeScript',
@@ -55,7 +54,7 @@ const HERO_DATA = {
   ],
 };
 
-export default function HeroSection({ setRef, onNavigate }: HeroProps) {
+export default function HeroSection({ setRef, onNavigate, onContactNavigate }: HeroProps) {
   return (
     <section
       ref={setRef}
@@ -99,13 +98,13 @@ export default function HeroSection({ setRef, onNavigate }: HeroProps) {
             <ChevronRight className="w-4 h-4" />
           </button>
 
-          <a
-            href="mailto:lawrencemunenex@gmail.com"
+          <button
+            onClick={onContactNavigate}
             className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl bg-slate-900/60 border border-slate-700/60 backdrop-blur-md text-slate-200 font-semibold text-sm hover:bg-slate-800/80 hover:border-cyan-500/40 hover:text-white transition-all"
           >
             <Terminal className="w-4 h-4 text-cyan-400" />
             <span>Initiate Contact</span>
-          </a>
+          </button>
         </div>
 
         {/* Tech Stack Pills */}

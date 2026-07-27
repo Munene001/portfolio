@@ -9,23 +9,65 @@ interface ProjectsProps {
 
 // -------------------------------------------------------------
 // DATA DECLARATION DECLARATIONS (Edit showcase array objects cleanly here)
-// -------------------------------------------------------------
 const DATA_PROJECTS = [
   {
-    title: "Project Alpha Horizon",
-    description: "A secure, visual control dashboard interface built to display incoming system array statuses and flight configurations cleanly.",
-    tags: ["React Framework", "TailwindCSS", "Framer Motion"],
-    image: "", // Leave blank to trigger fallback icon securely
-    liveLink: "https://example.com",
-    repoLink: "https://github.com"
+    title: "PaziaTech",
+    description: "Multi-tenant SaaS e-commerce platform enabling businesses to manage online stores, inventory, orders, and digital payments.",
+    tags: ["React", "Next.js", "TypeScript", "MYSQL", "Supabase", "Tailwind CSS"],
+    image: "/projects/pazia.jpg",
+    liveLink: "https://paziatech.co.ke",
+    repoLink: "https://github.com/Munene001/New-Ecommerce",
+    isPrivate: false
   },
+  
   {
-    title: "Quantum Core Pipeline",
-    description: "Secure multi-threaded backend communication nodes optimized for cryptographic encryption arrays across network channels.",
-    tags: ["Next.js", "TypeScript Core", "Prisma Client"],
-    image: "", 
-    liveLink: "https://example.com",
-    repoLink: "https://github.com"
+    title: "Tunga Africa",
+    description: "Platform integrating African films into education as meaningful learning resources. Supporting critical thinking, cultural understanding, and dialogue across schools and tertiary institutions.",
+    tags: ["React", "Next.js", "TypeScript", "Tailwind CSS", "REST APIs"],
+    image: "/projects/tunga.jpg",
+    liveLink: "https://app.dev.tunga.africa",
+    repoLink: "Private Repository",
+    isPrivate: true
+  },
+
+  {
+    title: "EasyWays Credit",
+    description: "CBK-licensed digital lending platform offering personal loans with M-Pesa integration, flexible repayment terms, and CRB credit-score-based pricing.",
+    tags: ["Laravel", "Svelte", "MySQL"],
+    image: "/projects/easyway.jpg",
+    liveLink: "https://easywayscredit.co.ke",
+    repoLink: "https://github.com/Munene001/Easyway",
+    isPrivate: false
+  },
+
+  {
+    title: "FBI Kenya",
+    description: "Civic engagement platform documenting human rights violations, supporting whistleblower officers, and mobilizing citizens for police reform and accountability.",
+    tags: ["Laravel", "Nuxt.js", "MySQL"],
+    image: "/projects/fbi.jpg",
+    liveLink: "https://fbikenya.org",
+    repoLink: "https://github.com/Munene001/FBI",
+    isPrivate: false
+  },
+
+  {
+    title: "Soulspring Mental Health",
+    description: "Cross-platform mobile app connecting clients with therapists. Features secure authentication, therapist discovery, appointment booking, and email-based communication.",
+    tags: ["Flutter", "Node.js", "Firebase", "Cloud Firestore", "Provider"],
+    image: "/projects/soulspring.jpeg",
+    liveLink: "https://github.com/Munene001/Soulspring1",
+    repoLink: "https://github.com/Munene001/Soulspring1",
+    isPrivate: false
+  },
+
+  {
+    title: "Yobra Store (PaziaTech Demo)",
+    description: "Demo online storefront built on the PaziaTech e-commerce platform showcasing the customer-facing experience.",
+    tags: ["React", "Next.js", "Tailwind CSS"],
+    image: "/projects/yobra.jpg",
+    liveLink: "https://yobra.paziatech.co.ke",
+    repoLink: "https://github.com/Munene001/New-Ecommerce",
+    isPrivate: false
   }
 ];
 
@@ -64,13 +106,13 @@ export default function ProjectsSection({ setRef }: ProjectsProps) {
                   {project.title}
                 </h3>
                 
-                <p className="text-white/40 text-xs sm:text-sm leading-relaxed mb-6 flex-1 font-sans">
+                <p className="text-white/90 text-xs sm:text-sm leading-relaxed mb-6 flex-1 font-sans">
                   {project.description}
                 </p>
 
                 <div className="flex flex-wrap gap-1 mb-6">
                   {project.tags.map((tag) => (
-                    <span key={tag} className="text-[9px] font-sans font-bold text-white/50 bg-white/5 border border-white/5 px-2 py-0.5 rounded">
+                    <span key={tag} className="text-[9px] font-sans font-bold text-white/80 bg-white/5 border border-white/5 px-2 py-0.5 rounded">
                       {tag}
                     </span>
                   ))}
@@ -87,13 +129,21 @@ export default function ProjectsSection({ setRef }: ProjectsProps) {
                     <ExternalLink className="w-3 h-3" />
                   </a>
                   <a 
-                    href={project.repoLink} 
+                    href={project.isPrivate ? "#" : project.repoLink} 
                     target="_blank" 
                     rel="noreferrer"
-                    className="flex items-center gap-1.5 text-white/30 text-[10px] hover:text-white/70 transition-colors font-bold tracking-widest uppercase ml-auto"
+                    className={`flex items-center gap-1.5 text-[10px] font-bold tracking-widest uppercase transition-colors ml-auto ${
+                      project.isPrivate 
+                        ? 'text-white/20 cursor-not-allowed' 
+                        : 'text-white/70 hover:text-white/80'
+                    }`}
+                    onClick={(e) => {
+                      if (project.isPrivate) {
+                        e.preventDefault();
+                      }
+                    }}
                   >
-                    
-                    <span>Source</span>
+                    <span>{project.isPrivate ? 'Private Repo' : 'Source'}</span>
                   </a>
                 </div>
               </div>
