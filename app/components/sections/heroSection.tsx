@@ -39,6 +39,7 @@ const HERO_DATA = {
     'Tailwind CSS',
     'Supabase',
     'Laravel',
+    'SpringBoot',
     'MySQL',
     'Git',
     'Linux',

@@ -7,7 +7,7 @@ const MISSION_LOGS = [
   {
     role: "Fullstack Engineer",
     company: "PaziaTech",
-    period: "Jan 2025 – Present",
+    period: "Feb 2026 – Present",
     description:
       "Founded and built a multi-tenant SaaS e-commerce platform from the ground up. Designed scalable backend services, developed modern web applications, implemented authentication and RBAC, and continuously improved performance and user experience.",
 
@@ -25,7 +25,7 @@ const MISSION_LOGS = [
   {
     role: "Frontend Engineer",
     company: "Tunga Africa",
-    period: "Aug 2025 – Apr 2026",
+    period: "Aug 2025 – Feb 2026",
      description:
     "Developed responsive and accessible frontend features for an educational platform that helps integrate African films into schools and tertiary institutions. Collaborated with designers and backend engineers to build engaging user experiences, integrate REST APIs, and improve performance across the platform.",
 

@@ -11,12 +11,12 @@ const TECH_GROUPS = [
   {
     category: "Languages",
     badge: "Runtime & Syntax",
-    skills: ["PHP 8+", "TypeScript", "JavaScript (ES6+)", "SQL"]
+    skills: ["PHP 8+", "TypeScript","Java", "JavaScript (ES6+)", "SQL"]
   },
   {
     category: "Backend & Systems",
     badge: "Server & API",
-    skills: ["Laravel", "Node.js", "RESTful APIs", "M-Pesa Integration"]
+    skills: ["Laravel", "Node.js","SpringBoot", "RESTful APIs", "M-Pesa Integration"]
   },
   {
     category: "Frontend Stack",
@@ -36,7 +36,7 @@ const TECH_GROUPS = [
   {
     category: "Testing & Quality",
     badge: "Reliability",
-    skills: ["PHPUnit", "Query Optimization", 'Jest']
+    skills: ["PHPUnit", "Query Optimization", 'Jest' ]
   }
 ];
 
