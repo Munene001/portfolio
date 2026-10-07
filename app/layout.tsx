@@ -35,8 +35,9 @@ export default function RootLayout({
       <body suppressHydrationWarning className="bg-[#0a0a12]">
         {/* Persistent background & global tsParticles context */}
         <StarfieldProvider>
-          {children}
+          
         </StarfieldProvider>
+        {children}
       </body>
     </html>
   );
